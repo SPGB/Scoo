@@ -172,10 +172,13 @@ $(function () {
 	});
 	$('.scoo').click(function () {
 		click();
+		ga._trackEvent('Scoo', 'Click');
 		return false;
 	});
 	$('body').on('click', '.upgrade', function () {
-		upgrade_click( $(this).attr('x-id') );
+		var id = Number($(this).attr('x-id'));
+		upgrade_click( id );
+		ga._trackEvent('Scoo', 'Upgrade', 'Unlock', id);
 		return false;
 	});
 });
@@ -257,7 +260,7 @@ function update() {
 		if (!scoo.is_showing_multiplier) {
 			$('.steam_multiplier').hide();
 		}
-		$('.scoo_steam').attr('x-percent', percent).css('width', percent + '%');
+		$('.scoo_steam').attr('x-percent', percent).css('width', (100 - percent) + '%');
 		$('.scoo_steam_container').show();
 		if (scoo.achievements.indexOf('Discovered Capacity') == -1) {
 			alert('The red bar is Capacity.', true);
