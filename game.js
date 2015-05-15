@@ -22,46 +22,55 @@ var upgrades = [
 		cost: 10,
 		click_bonus: 1,
 		achievement: 'First upgrade unlocked',
+		tooltip: 'Increased your bonus for clicking by 1'
 	},
 	{
 		name: 'Upgrade Amount Lv1',
 		cost: 15,
 		upgrade_bonus: 2,
+		tooltip: 'Increases the number of upgrades available by 1'
 	},
 	{
 		name: 'Multiplier bar Lv1',
 		cost: 20,
 		upgrade_multi_bar: 10,
+		tooltip: 'Increased the width of the multiplier bar by 10%'
 	},
 	{
 		name: 'Capacity Lv1',
 		cost: 10,
-		capacity_bonus: 5
+		capacity_bonus: 5,
+		tooltip: 'Increases Scoo\'s maximum capacity by 5'
 	},
 	{
 		name: 'Capacity Rate Lv1',
 		cost: 30,
-		capacity_rate_bonus: 0.25
+		capacity_rate_bonus: 0.25,
+		tooltip: 'Capacity will cool off quicker (0.25/s)'
 	},
 	{
 		name: 'Multiplier bonus Lv1',
 		cost: 50,
 		upgrade_multi_bonus: 0.5,
+		tooltip: 'Increases the bonus while in the multiplier zone'
 	},
 	{
 		name: 'Clicker Lv2',
 		cost: 25,
-		click_bonus: 1
+		click_bonus: 1,
+		tooltip: 'Increased your bonus for clicking by 1'
 	},
 	{
 		name: 'Clicker Lv3',
 		cost: 50,
-		click_bonus: 1
+		click_bonus: 1,
+		tooltip: 'Increased your bonus for clicking by 1'
 	},
 		{
 		name: 'Capacity Lv2',
 		cost: 50,
-		capacity_bonus: 5
+		capacity_bonus: 5,
+		tooltip: 'Increases Scoo\'s maximum capacity by 5'
 	},
 	{
 		name: 'Capacity Rate Lv2',
@@ -258,6 +267,7 @@ function update_frame() {
 						'class': 'upgrade',
 						'x-id': i,
 						'x-cost': upgrades[i].cost,
+						'title': upgrades[i].tooltip,
 						html: upgrades[i].name +
 						'<div class="cost">Costs ' + upgrades[i].cost + '</div><div class="progress"></div>'
 					});
