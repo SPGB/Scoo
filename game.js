@@ -148,6 +148,9 @@ var upgrades = [
 var is_stickied = false;
 $(function () {
 	load_game();
+	if (scoo.total_points === 0) {
+		alert('Click Me!');
+	}
 	setInterval(update_frame, 1000);
 	setInterval(save_game, 5000);
 	setInterval(update, 100);
@@ -361,9 +364,7 @@ function load_game() {
 		try {
 			scoo = JSON.parse( atob( retrievedObject ) );
 		} catch(e) {
-			alert('Click Me!');
+			console.log(e);
 		}
-	} else {
-		alert('Click Me!');
 	}
 }

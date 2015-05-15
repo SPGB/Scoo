@@ -113,3 +113,6 @@ a {
 	margin-bottom: 20px;
 	text-align: left;
 }
+.fb-share-button {
+    display: inline-block;
+}
