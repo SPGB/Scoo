@@ -25,8 +25,13 @@ var upgrades = [
 	},
 	{
 		name: 'Upgrade Amount Lv1',
-		cost: 10,
-		upgrade_bonus: 1,
+		cost: 15,
+		upgrade_bonus: 2,
+	},
+	{
+		name: 'Multiplier bar Lv1',
+		cost: 20,
+		upgrade_multi_bar: 10,
 	},
 	{
 		name: 'Capacity Lv1',
@@ -37,6 +42,11 @@ var upgrades = [
 		name: 'Capacity Rate Lv1',
 		cost: 30,
 		capacity_rate_bonus: 0.25
+	},
+	{
+		name: 'Multiplier bonus Lv1',
+		cost: 50,
+		upgrade_multi_bonus: 0.5,
 	},
 	{
 		name: 'Clicker Lv2',
@@ -57,6 +67,11 @@ var upgrades = [
 		name: 'Capacity Rate Lv2',
 		cost: 60,
 		capacity_rate_bonus: 0.25
+	},
+	{
+		name: 'Multiplier bonus Lv2',
+		cost: 75,
+		upgrade_multi_bonus: 0.5,
 	},
 	{
 		name: 'Clicker Lv4',
@@ -85,11 +100,21 @@ var upgrades = [
 		click_bonus: 1
 	},
 	{
+		name: 'Multiplier bonus Lv3',
+		cost: 175,
+		upgrade_multi_bonus: 0.5,
+	},
+	{
 		name: 'Clicker Lv6',
 		cost: 200,
 		click_bonus: 1
 	},
 		{
+		name: 'Multiplier bar Lv2',
+		cost: 210,
+		upgrade_multi_bar: 10,
+	},
+	{
 		name: 'Capacity Lv4',
 		cost: 250,
 		capacity_bonus: 1
@@ -104,6 +129,11 @@ var upgrades = [
 		cost: 300,
 		click_bonus: 1,
 		achievement: 'First upgrade unlocked'
+	},
+	{
+		name: 'Multiplier bonus Lv4',
+		cost: 325,
+		upgrade_multi_bonus: 0.5,
 	},
 	{
 		name: 'Capacity Lv5',
@@ -124,6 +154,11 @@ var upgrades = [
 		name: 'Clicker Lv8',
 		cost: 450,
 		click_bonus: 1
+	},
+	{
+		name: 'Multiplier bonus Lv5',
+		cost: 500,
+		upgrade_multi_bonus: 0.5,
 	},
 	{
 		name: 'Clicker Lv9',
@@ -244,7 +279,7 @@ function update() {
 			percent = 100;
 		}
 		if (percent > 50 - (scoo.multiplier_width / 2) && percent < 50 + (scoo.multiplier_width / 2)) {
-			steam_multiplier = 2;
+			steam_multiplier = 1 + scoo. ;
 			if (!scoo.is_showing_multiplier) {
 				$('.steam_multiplier').show();
 				scoo.is_showing_multiplier = true;
@@ -312,6 +347,12 @@ function upgrade_click(id) {
 	}
 	if (up.upgrade_bonus) {
 		scoo.upgrades_to_show += up.upgrade_bonus;
+	}
+	if (up.upgrade_multi_bar) {
+		scoo.multiplier_width += up.upgrade_multi_bar;
+	}
+	if (up.upgrade_multi_bonus) {
+		scoo.multiplier_bonus += up.upgrade_multi_bonus;
 	}
 	if (up.is_win) {
 		is_stickied = true;
