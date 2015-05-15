@@ -11,7 +11,10 @@ var scoo = {
 	achievements: [],
 	upgrades: [],
 	upgrades_to_show: 1,
-	start_time: new Date()
+	start_time: new Date(),
+	multiplier_width: 25,
+	multiplier_bonus: 0.5,
+	is_showing_multiplier: false
 };
 var upgrades = [
 	{
@@ -149,16 +152,23 @@ var upgrades = [
 ];
 var steam_multiplier = 1;
 var is_stickied = false;
+var alert_queue = [];
+var bar_colors = [];
+
 $(function () {
 	load_game();
 	if (scoo.total_points === 0) {
 		alert('Click Me!');
+		$('.scoo_steam_container').hide();
 	}
 	setInterval(update_frame, 1000);
 	setInterval(save_game, 5000);
 	setInterval(update, 100);
 	$('.clear').click(function () {
 		clear_game();
+	});
+	$('body').on('click', '.tooltip', function () {
+		alert_dismiss();
 	});
 	$('.scoo').click(function () {
 		click();
@@ -217,39 +227,47 @@ function update_frame() {
 			}
 		}
 	}
+
+	$('.scoo_steam_middle').css('width', scoo.multiplier_width + '%');
 }
 function update() {
 	if (is_stickied) return false;
 	
-	if (scoo.steam > 0) {
+	if (scoo.steam > 0 && scoo.total_points > 0) {
 		scoo.steam -= scoo.steam_increment / 10;
-
+		if (scoo.steam < 0) scoo.steam = 0;
 		var percent = scoo.steam / scoo.steam_cap / 0.01;
-		if (percent > 100) percent = 100;
-		if (percent > 25 && percent < 75) {
+		if (percent > 100) {
+			percent = 100;
+		}
+		if (percent > 50 - (scoo.multiplier_width / 2) && percent < 50 + (scoo.multiplier_width / 2)) {
 			steam_multiplier = 2;
+			if (!scoo.is_showing_multiplier) {
+				$('.steam_multiplier').show();
+				scoo.is_showing_multiplier = true;
+				alert('This is the multiplier box.', true);
+				alert('Getting Scoo\'s capacity bar within the box gives a bonus.', true);
+			}
 		} else {
 			steam_multiplier = 1;
 		}
+		if (percent > 90) {
+			steam_multiplier = 0;
+		}
+		if (!scoo.is_showing_multiplier) {
+			$('.steam_multiplier').hide();
+		}
 		$('.scoo_steam').attr('x-percent', percent).css('width', percent + '%');
-
 		$('.scoo_steam_container').show();
 		if (scoo.achievements.indexOf('Discovered Capacity') == -1) {
 			alert('The red bar is Capacity.', true);
-			setTimeout(function () {
-				alert(' It heats up over time, preventing Scoo from getting points.', true);
-			}, 4000);
-			setTimeout(function () {
-				alert_dismiss();
-			}, 9000);
+			alert(' It heats up over time, preventing Scoo from getting points.', true);
 			scoo.achievements.push('Discovered Capacity');
 			return;
 		}
 		$('.steam_current')[0].textContent = Math.floor(scoo.steam);
 		$('.steam_cap')[0].textContent = Math.floor(scoo.steam_cap);
-		$('.steam_multiplier')[0].textContent = steam_multiplier + 'x';
-	} else {
-		$('.scoo_steam_container').hide();
+		if (scoo.is_showing_multiplier) $('.steam_multiplier')[0].textContent = steam_multiplier + 'x';
 	}
 
 	if (scoo.points > 0) {
@@ -319,7 +337,6 @@ function upgrade_click(id) {
 }
 function click() {
 	if (is_stickied) return false;
-	if (scoo.steam + (scoo.points_increment / 2) > scoo.steam_cap) return;
 
 	scoo.points += steam_multiplier * scoo.points_increment;
 	scoo.total_points += steam_multiplier * scoo.points_increment;
@@ -343,13 +360,19 @@ function click() {
 	}
 }
 function alert(msg, is_sticky) {
-	alert_dismiss(1);
 	if (is_sticky) {
+		if (is_stickied) {
+			alert_queue.push(msg);
+			return false;
+		}
 		is_stickied = true;
+	} else {
+		alert_dismiss(1);
 	}
 	var elem = $('<div />', {
 		'class': 'tooltip',
-		text: msg
+		text: msg,
+		is_sticky: is_sticky
 	});
 	$('.scoo_container').prepend(elem);
 	return false;
@@ -360,6 +383,9 @@ function alert_dismiss(speed) {
 		$(this).remove();
 	});
 	is_stickied = false;
+	if (alert_queue.length > 0) {
+		alert(alert_queue.splice(0, 1), true);
+	}
 }
 function save_game() {
 	localStorage.setItem('scoo', btoa( JSON.stringify(scoo) ));

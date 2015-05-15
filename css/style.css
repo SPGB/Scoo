@@ -39,12 +39,23 @@ a {
     position: absolute;
     top: -30px;
     transform: translateX(-50%);
-    pointer-events: none;
     -ms-user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
     z-index: 2;
+}
+.tooltip[is_sticky="true"] {
+    cursor: pointer;
+}
+
+.tooltip[is_sticky="true"]::before {
+    bottom: 5px;
+    color: #3e2723;
+    content: "Click to continue";
+    font-size: 12px;
+    position: absolute;
+    right: 5px;
 }
 .tooltip::after {
     border-left: 10px solid transparent;
@@ -120,12 +131,13 @@ a {
 }
 .scoo_steam_middle {
     position: absolute;
-    width: 50%;
+    width: 25%;
     height: 10px;
-    left: 25%;
+    left: 50%;
     border: 2px solid #fff;
     top: -2px;
     z-index: 2;
+    transform: translateX(-50%);
 }
 .steam_numbers {
     font-size: 16px;
