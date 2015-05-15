@@ -3,9 +3,23 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Scoo - Incremental</title>
+	<meta property="og:title" content="Scoo, incremental" />
+	<meta property="og:description" content="A free incremental game. Help Scoo the scoopling find what he lost." />
+	<meta property="og:url" content="http://spgb.github.io/Scoo/" />
+	<meta property="og:image" content="http://spgb.github.io/Scoo/share.png" />
+	<meta name="description" content="A free incremental game. Help Scoo the scoopling find what he lost.">
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=1421033384776672";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
 	<div class="floating_center">
 		<div class="inner">
 			<div x-col="3" class="upgrades_container" style="opacity: 0;">
@@ -33,7 +47,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
 	<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 	<div class="footer">
-		Scoo the Scoopling - <a href="#" class="clear">Restart</a> - <a href="https://twitter.com/SamGB" target="_blank"><i class="fa fa-twitter"></i> @Samgb</a>
+		Scoo the Scoopling - <a href="#" class="clear">Restart</a> - <div class="fb-share-button" data-href="http://spgb.github.io/Scoo/" data-layout="icon_link"></div> <a href="https://twitter.com/SamGB" target="_blank"><i class="fa fa-twitter"></i> @Samgb</a>
 	</div>
 </body>
 </html>
