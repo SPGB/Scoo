@@ -206,7 +206,7 @@ $(function () {
 		alert('Scoo has earned ' + scoo.total_points + ' points', true);
 		alert('Scoo has unlocked ' + scoo.upgrades.length + ' upgrades', true);
 		var d = new Date();
-		var diff = (d - scoo.start_time) / 1000 / 60 / 60;
+		var diff = (d - new Date(scoo.start_time) ) / 1000 / 60 / 60;
 		alert('You have played for ' + (diff).toFixed(3) + ' hours', true);
 	});
 	$('body').on('click', '.tooltip', function () {
@@ -364,7 +364,7 @@ function upgrade_click(id) {
 	if (up.is_win) {
 		is_stickied = true;
 		var d = new Date();
-		var diff = (d - scoo.start_time) / 1000 / 60 / 60;
+		var diff = (d - new Date(scoo.start_time) ) / 1000 / 60 / 60;
 		alert('Congratulations! You win.', true);
 		alert('You earned a total of ' + scoo.total_points + ' points', true);
 		alert('It took you ' + (diff).toFixed(3) + ' hours to win', true);
