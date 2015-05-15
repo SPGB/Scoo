@@ -80,6 +80,12 @@ a {
 	top: 100px;
 	font-weight: bold;
 	pointer-events: none;
+    text-align: center;
+    text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff; 
 }
 .point_counter {
     background-color: #37474f;
@@ -146,10 +152,56 @@ a {
     position: absolute;
     right: 0;
     top: 20px;
+    color: #222;
 }
 .steam_current {
     float: left;
 }
 .steam_cap {
     float: right;
+}
+.upgrade[x-afford="true"]:before {
+    content: "\f061";
+    position: absolute;
+    left: -50px;
+    color: #81C784;
+    font-family: 'Fontawesome';
+    font-size: 24px;
+    top: 10px;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-name: poke;
+}
+@-moz-keyframes poke {
+    0% {
+        left: -50px;
+    }
+    50% {
+        left: -25px;
+    }
+    100% {
+        left: -50px;
+    }
+}
+@-webkit-keyframes poke {
+    0% {
+        left: -50px;
+    }
+    50% {
+        left: -25px;
+    }
+    100% {
+        left: -50px;
+    }
+}
+@keyframes poke {
+    0% {
+        left: -50px;
+    }
+    50% {
+        left: -25px;
+    }
+    100% {
+        left: -50px;
+    }
 }

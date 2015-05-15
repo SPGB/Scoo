@@ -188,7 +188,7 @@ var upgrades = [
 var steam_multiplier = 1;
 var is_stickied = false;
 var alert_queue = [];
-var bar_colors = [];
+var bar_colors = ['#01579B', '#764E7F', '#D50000'];
 
 $(function () {
 	load_game();
@@ -258,7 +258,7 @@ function update_frame() {
 						'class': 'upgrade',
 						'x-id': i,
 						'x-cost': upgrades[i].cost,
-						html: upgrades[i].name + 
+						html: upgrades[i].name +
 						'<div class="cost">Costs ' + upgrades[i].cost + '</div><div class="progress"></div>'
 					});
 
@@ -362,7 +362,6 @@ function upgrade_click(id) {
 		scoo.multiplier_bonus += up.upgrade_multi_bonus;
 	}
 	if (up.is_win) {
-		is_stickied = true;
 		var d = new Date();
 		var diff = (d - new Date(scoo.start_time) ) / 1000 / 60 / 60;
 		alert('Congratulations! You win.', true);
@@ -390,8 +389,12 @@ function click() {
 		'x-amount': scoo.points_increment,
 		text: '+' + (steam_multiplier * scoo.points_increment)
 	});
+	var steam_percent = scoo.steam / scoo.steam_cap;
+	if (steam_percent < .25) elem.css('color', bar_colors[0]); 
+	else if (steam_percent < .5) elem.css('color', bar_colors[1]); 
+	else if (steam_percent < .75) elem.css('color', bar_colors[2]); 
 	$('.scoo_container').append(elem);
-	elem.animate({ top: '-50px', opacity: 0.5 }, function () {
+	elem.animate({ top: '-50px', opacity: 0.5 }, 1000, function () {
 		$(this).remove();
 	});
 	if (!is_stickied) alert_dismiss();
@@ -418,6 +421,10 @@ function alert(msg, is_sticky) {
 		is_sticky: is_sticky
 	});
 	$('.scoo_container').prepend(elem);
+	if (is_sticky) {
+		elem.slideUp(0).hide();
+		elem.fadeIn(500).slideDown(1000);
+	}
 	return false;
 }
 function alert_dismiss(speed) {
