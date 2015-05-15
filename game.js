@@ -36,7 +36,7 @@ var upgrades = [
 	{
 		name: 'Capacity Lv1',
 		cost: 10,
-		capacity_bonus: 1
+		capacity_bonus: 5
 	},
 	{
 		name: 'Capacity Rate Lv1',
@@ -61,7 +61,7 @@ var upgrades = [
 		{
 		name: 'Capacity Lv2',
 		cost: 50,
-		capacity_bonus: 1
+		capacity_bonus: 5
 	},
 	{
 		name: 'Capacity Rate Lv2',
@@ -82,7 +82,7 @@ var upgrades = [
 	{
 		name: 'Capacity Lv3',
 		cost: 100,
-		capacity_bonus: 1
+		capacity_bonus: 5
 	},
 	{
 		name: 'Upgrade Amount Lv2',
@@ -117,7 +117,7 @@ var upgrades = [
 	{
 		name: 'Capacity Lv4',
 		cost: 250,
-		capacity_bonus: 1
+		capacity_bonus: 5
 	},
 	{
 		name: 'Capacity Rate Lv4',
@@ -138,7 +138,7 @@ var upgrades = [
 	{
 		name: 'Capacity Lv5',
 		cost: 300,
-		capacity_bonus: 1
+		capacity_bonus: 5
 	},
 	{
 		name: 'Upgrade Amount Lv3',
@@ -168,7 +168,7 @@ var upgrades = [
 		{
 		name: 'Capacity Lv6',
 		cost: 500,
-		capacity_bonus: 1
+		capacity_bonus: 5
 	},
 	{
 		name: 'Capacity Rate Lv6',
@@ -201,6 +201,12 @@ $(function () {
 	setInterval(update, 100);
 	$('.clear').click(function () {
 		clear_game();
+	});
+	$('.stats').click(function () {
+		alert('Scoo has earned ' + scoo.total_points + ' points', true);
+		alert('Scoo has unlocked ' + scoo.upgrades.length + ' upgrades', true);
+		var diff = (d - scoo.start_time) / 1000 / 60 / 60;
+		alert('You have played for ' + (diff).toFixed(3) + ' hours', true);
 	});
 	$('body').on('click', '.tooltip', function () {
 		alert_dismiss();
@@ -357,20 +363,12 @@ function upgrade_click(id) {
 	if (up.is_win) {
 		is_stickied = true;
 		var d = new Date();
-		alert('Congratulations! You win.');
-		setTimeout(function () {
-			alert('You earned a total of ' + scoo.total_points + ' points');
-		}, 3000);
-		setTimeout(function () {
-			var diff = (d - scoo.start_time) / 1000 / 60 / 60;
-			alert('It took you ' + (diff).toFixed(3) + ' hours to win');
-		}, 6000);
-		setTimeout(function () {
-			alert('If you enjoyed Scoo please share it so I can make similar games.');
-		}, 9000);
-		setTimeout(function () {
-			alert_dismiss();
-		}, 12000);
+		var diff = (d - scoo.start_time) / 1000 / 60 / 60;
+		alert('Congratulations! You win.', true);
+		alert('You earned a total of ' + scoo.total_points + ' points', true);
+		alert('It took you ' + (diff).toFixed(3) + ' hours to win', true);
+		alert('If you enjoyed Scoo please share it so I can make similar games.', true);
+
 	} else {
 		alert('Bought ' + up.name);
 	}
