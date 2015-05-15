@@ -2,6 +2,10 @@
 .scoo_container {
     padding: 100px 0;
     position: relative;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .scoo {
     background-image: url("http://static.icecreamstand.ca/scoopling_spritesheet.png");
@@ -70,6 +74,7 @@
     right: 0;
     position: absolute;
     transition: width 0.25s ease 0s;
+    width: 100%;
 }
 .scoo_steam_background {
     background: #2196f3; /* Old browsers */
