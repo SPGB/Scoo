@@ -1,3 +1,5 @@
+(function () { 
+
 var scoo = {
 	frame: 0,
 	points: 0,
@@ -145,6 +147,7 @@ var upgrades = [
 		achievement: 'You Win!'
 	},
 ];
+var steam_multiplier = 1;
 var is_stickied = false;
 $(function () {
 	load_game();
@@ -223,6 +226,11 @@ function update() {
 
 		var percent = scoo.steam / scoo.steam_cap / 0.01;
 		if (percent > 100) percent = 100;
+		if (percent > 25 && percent < 75) {
+			steam_multiplier = 2;
+		} else {
+			steam_multiplier = 1;
+		}
 		$('.scoo_steam').attr('x-percent', percent).css('width', percent + '%');
 
 		$('.scoo_steam_container').show();
@@ -237,7 +245,9 @@ function update() {
 			scoo.achievements.push('Discovered Capacity');
 			return;
 		}
-
+		$('.steam_current')[0].textContent = Math.floor(scoo.steam);
+		$('.steam_cap')[0].textContent = Math.floor(scoo.steam_cap);
+		$('.steam_multiplier')[0].textContent = steam_multiplier + 'x';
 	} else {
 		$('.scoo_steam_container').hide();
 	}
@@ -309,16 +319,16 @@ function upgrade_click(id) {
 }
 function click() {
 	if (is_stickied) return false;
-	if (scoo.steam + scoo.points_increment > scoo.steam_cap) return;
+	if (scoo.steam + (scoo.points_increment / 2) > scoo.steam_cap) return;
 
-	scoo.points += scoo.points_increment;
-	scoo.total_points += scoo.points_increment;
-	scoo.steam += scoo.points_increment;
+	scoo.points += steam_multiplier * scoo.points_increment;
+	scoo.total_points += steam_multiplier * scoo.points_increment;
+	scoo.steam += (Math.random() * (scoo.points_increment / 2)) + 0.25;
 
 	var elem = $('<div />', {
 		'class': 'point',
 		'x-amount': scoo.points_increment,
-		text: '+' + scoo.points_increment
+		text: '+' + (steam_multiplier * scoo.points_increment)
 	});
 	$('.scoo_container').append(elem);
 	elem.animate({ top: '-50px', opacity: 0.5 }, function () {
@@ -368,3 +378,5 @@ function load_game() {
 		}
 	}
 }
+
+})();
