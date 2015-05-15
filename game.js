@@ -205,6 +205,7 @@ $(function () {
 	$('.stats').click(function () {
 		alert('Scoo has earned ' + scoo.total_points + ' points', true);
 		alert('Scoo has unlocked ' + scoo.upgrades.length + ' upgrades', true);
+		var d = new Date();
 		var diff = (d - scoo.start_time) / 1000 / 60 / 60;
 		alert('You have played for ' + (diff).toFixed(3) + ' hours', true);
 	});
