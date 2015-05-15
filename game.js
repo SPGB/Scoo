@@ -279,7 +279,7 @@ function update() {
 			percent = 100;
 		}
 		if (percent > 50 - (scoo.multiplier_width / 2) && percent < 50 + (scoo.multiplier_width / 2)) {
-			steam_multiplier = 1 + scoo. ;
+			steam_multiplier = 1 + scoo.multiplier_bonus;
 			if (!scoo.is_showing_multiplier) {
 				$('.steam_multiplier').show();
 				scoo.is_showing_multiplier = true;
