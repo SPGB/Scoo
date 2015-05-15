@@ -1,0 +1,115 @@
+body {
+    background-color: #607d8b;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+a {
+	text-decoration: none;
+	color: #3e2723;
+}
+.floating_center {
+	position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+}
+.inner {
+    font-size: 0;
+    margin: 0px auto;
+    max-width: 960px;
+
+}
+[x-col="3"] {
+    display: inline-block;
+    font-size: 18px;
+    min-height: 10px;
+    text-align: center;
+    vertical-align: top;
+    width: 33%;
+}
+.upgrades_container {
+	transition: opacity 0.5s ease 0s;
+}
+.tooltip {
+    background-color: #fff;
+    left: 50%;
+    margin-left: -10px;
+    padding: 20px;
+    position: absolute;
+    top: -30px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    z-index: 2;
+}
+.tooltip::after {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 20px solid #fff;
+    bottom: -20px;
+    content: "";
+    left: 50%;
+    margin-left: -10px;
+    position: absolute;
+}
+.footer {
+    bottom: 10px;
+    position: absolute;
+    right: 10px;
+}
+.point {
+	color: #ff3d00;
+	position: absolute;
+	font-size: 32px;
+	left: 40%;
+	top: 100px;
+	font-weight: bold;
+	pointer-events: none;
+}
+.point_counter {
+    background-color: #37474f;
+    color: #fff;
+    display: inline-block;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.upgrade {
+    background-color: #78909c;
+    padding: 10px;
+    text-align: left;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background 0.25s ease 0s;
+}
+.upgrade[x-afford="true"] {
+    background-color: #66bb6a;
+}
+.upgrade:hover {
+	background-color: #90a4ae;
+}
+.upgrade[x-afford="true"]:hover {
+    background-color: #81c784;
+}
+.cost {
+    color: #3e2723;
+    float: right;
+}
+.progress {
+    background: none repeat scroll 0 0 #37474f;
+    bottom: -5px;
+    height: 5px;
+    left: 0;
+    position: absolute;
+    transition: width 0.25s ease 0s;
+}
+.achievement {
+    background-color: #78909c;
+    padding: 10px;
+	margin-bottom: 20px;
+	text-align: left;
+}
