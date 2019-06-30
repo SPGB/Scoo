@@ -8,7 +8,7 @@
     user-select: none;
 }
 .scoo {
-    background-image: url("http://static.icecreamstand.ca/scoopling_spritesheet.png");
+    background-image: url("images/scoopling_spritesheet.png");
     cursor: pointer;
     display: inline-block;
     height: 130px;
